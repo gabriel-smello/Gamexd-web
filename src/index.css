@@ -1,0 +1,33 @@
+@import "tailwindcss";
+
+@theme {
+  --color-blue-theme: #48a1d0;
+  --color-blue-theme-darker: #4640bf;
+  --color-background-secondary: #26282c;
+}
+
+:root {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #202123;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
