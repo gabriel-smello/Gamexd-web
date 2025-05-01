@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
+import "../../App.css";
 import joystick from "../../assets/joystick-favicon.png";
-import { Search } from "lucide-react";
-import { Avatar, Dropdown } from "antd";
+import { MenuIcon, Search, X } from "lucide-react";
+import { Avatar, Drawer, Dropdown } from "antd";
 import { UserRound } from "lucide-react";
 import { useLocation, Link } from "react-router-dom";
 
@@ -22,19 +23,20 @@ function classNames(...classes) {
 
 const Header = () => {
   const location = useLocation();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <div className="mx-auto mt-1">
+    <div className="mx-auto mt-1 md:px-4">
       <div className="flex content-center justify-between">
         <div
-          className="flex content-center items-center cursor-pointer"
+          className="flex content-center items-center cursor-pointer min-w-[140px]"
           onClick={() => (window.location.href = "/")}
         >
-          <img alt="Gamexd" src={joystick} className="h-15 w-auto" />
+          <img alt="Gamexd" src={joystick} className="h-15 w-auto mr-1" />
           <h1 className="text-2xl text-blue-theme">GameXD</h1>
         </div>
 
-        <div className="w-3/10 relative content-center">
+        <div className="flex-grow min-w-[150px] max-w-md w-3/10 relative content-center">
           <Search
             className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500"
             size={20}
@@ -45,7 +47,8 @@ const Header = () => {
           />
         </div>
 
-        <div className="flex content-center items-center">
+        {/* DESKTOP NAV */}
+        <div className="hidden md:flex content-center items-center">
           {navigation.map((item) => {
             const isHome = item.href === "/";
             const isActive = isHome
@@ -91,7 +94,82 @@ const Header = () => {
             </Dropdown>
           </div>
         </div>
+
+        {/* MOBILE MENU BUTTON */}
+        <button
+          className="md:hidden text-gray-500"
+          onClick={() => setMobileMenuOpen(true)}
+        >
+          <MenuIcon size={24}></MenuIcon>
+        </button>
       </div>
+      <Drawer
+        placement="right"
+        onClose={() => setMobileMenuOpen(false)}
+        open={mobileMenuOpen}
+        closable={false}
+        width={250}
+        style={{
+          backgroundColor: "var(--color-background-secondary)",
+          padding: 16,
+        }}
+      >
+        {/* CLOSE ICON */}
+        <div className="flex justify-end mb-4">
+          <button onClick={() => setMobileMenuOpen(false)}>
+            <X className="text-white cursor-pointer" />
+          </button>
+        </div>
+
+        {/* CLOSE ICON */}
+        <div className="mb-2">
+          <Avatar size="large" icon={<UserRound />} />
+        </div>
+
+        {/* MOBILE NAV */}
+        <div className="flex flex-col space-y-4">
+          {navigation.map((item) => {
+            const isHome = item.href === "/";
+            const isActive = isHome
+              ? location.pathname === "/"
+              : location.pathname.startsWith(item.href);
+            return (
+              <Link
+                key={item.name}
+                to={item.href}
+                aria-current={isActive ? "page" : undefined}
+                className={classNames(
+                  isActive ? "!text-blue-theme" : "!text-gray-500",
+                  "text-xl"
+                )}
+              >
+                {item.name}
+              </Link>
+            );
+          })}
+
+          <div className="mt-4">
+            {dropdownItems.map((item) => {
+              const isHome = item.href === "/";
+              const isActive = isHome
+                ? location.pathname === "/"
+                : location.pathname.startsWith(item.href);
+              return (
+                <a
+                  key={item.key}
+                  href={item.href}
+                  className={classNames(
+                    isActive ? "!text-blue-theme" : "!text-gray-500",
+                    "block py-1"
+                  )}
+                >
+                  {item.label}
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </Drawer>
     </div>
   );
 };
