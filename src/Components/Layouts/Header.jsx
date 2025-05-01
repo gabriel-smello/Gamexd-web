@@ -40,7 +40,7 @@ const Header = () => {
             size={20}
           />
           <input
-            className="w-full pl-10 pr-4 py-2 rounded-3xl bg-background-secondary focus:outline-none"
+            className="w-full pl-10 pr-4 py-2 rounded-3xl bg-background-secondary focus:outline-none text-gray-500 focus:text-white"
             placeholder="Search..."
           />
         </div>

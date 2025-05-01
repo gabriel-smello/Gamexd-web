@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
 
 const CatalogCarousel = ({ items }) => {
   const scrollRef = useRef(null);
@@ -32,22 +32,27 @@ const CatalogCarousel = ({ items }) => {
         className="flex overflow-x-auto scroll-smooth gap-4 no-scrollbar py-3"
       >
         {items.map((item, index) => {
-          const highResCoverUrl = item.coverUrl.replace(
+          const highResCoverUrl = item.cover_url.replace(
             "t_thumb",
             "t_cover_big"
           );
           return (
             <div
               key={index}
-              className="min-w-[200px] p-3 rounded-lg overflow-hidden bg-background-secondary text-white"
+              className="min-w-[200px] flex flex-col p-3 rounded-lg overflow-hidden bg-background-secondary text-white"
             >
               <img
                 src={highResCoverUrl}
                 alt={item.name}
                 className="w-full h-[200px] rounded-xl overflow-hidden object-cover"
               />
-              <div className="py-2">
-                <h3 className="text-sm font-semibold">{item.name}</h3>
+              <div className="py-2 flex justify-between truncate overflow-hidden">
+                <h3
+                  className="text-sm font-semibold truncate whitespace-nowrap overflow-hidden"
+                  title={item.name}
+                >
+                  {item.name}
+                </h3>
               </div>
               <div>
                 <h3 className="text-xs font-semibold text-gray-500">
@@ -56,6 +61,16 @@ const CatalogCarousel = ({ items }) => {
                     : "No genre available"}
                 </h3>
               </div>
+              {item.total_rating && (
+                <div className="flex flex-row-reverse items-center mt-auto">
+                  <h5 className="text-sm">{item.total_rating}%</h5>
+                  <Star
+                    fill="#ebb740"
+                    strokeWidth={0}
+                    className="mx-1 w-4 fill"
+                  ></Star>
+                </div>
+              )}
             </div>
           );
         })}
