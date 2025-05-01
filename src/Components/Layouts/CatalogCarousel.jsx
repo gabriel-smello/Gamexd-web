@@ -41,11 +41,13 @@ const CatalogCarousel = ({ items }) => {
               key={index}
               className="min-w-[200px] flex flex-col p-3 rounded-lg overflow-hidden bg-background-secondary text-white"
             >
-              <img
-                src={highResCoverUrl}
-                alt={item.name}
-                className="w-full h-[200px] rounded-xl overflow-hidden object-cover"
-              />
+              <div className="overflow-hidden rounded-xl group">
+                <img
+                  src={highResCoverUrl}
+                  alt={item.name}
+                  className="w-full h-[200px] object-cover transition-transform duration-300 ease-in-out group-hover:scale-105"
+                />
+              </div>
               <div className="py-2 flex justify-between truncate overflow-hidden">
                 <h3
                   className="text-sm font-semibold truncate whitespace-nowrap overflow-hidden"
