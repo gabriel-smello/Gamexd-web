@@ -65,7 +65,7 @@ const CatalogCarousel = ({ items }) => {
               </div>
               {item.total_rating && (
                 <div className="flex flex-row-reverse items-center mt-auto">
-                  <h5 className="text-sm">{item.total_rating}%</h5>
+                  <h5 className="text-sm">{item.total_rating.toFixed(2)}%</h5>
                   <Star
                     fill="#ebb740"
                     strokeWidth={0}

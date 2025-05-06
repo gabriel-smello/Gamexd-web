@@ -12,7 +12,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #202123;
+  background-color: var(--color-neutral-900);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -30,4 +30,15 @@ a {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Para o Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }
